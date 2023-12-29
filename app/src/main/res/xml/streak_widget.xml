@@ -4,12 +4,13 @@
     android:targetCellWidth="2"
     android:targetCellHeight="2"
     android:updatePeriodMillis="86400000"
-    android:description="@string/example_appwidget_description"
-    android:previewLayout="@layout/example_appwidget_preview"
-    android:initialLayout="@layout/example_loading_appwidget"
+    android:description="@string/streak_widget_description"
+    android:previewLayout="@layout/streak_widget_preview"
+    android:initialLayout="@layout/streak_widget_start_layout"
     android:resizeMode="none"
     android:widgetCategory="home_screen"
     android:widgetFeatures="reconfigurable|configuration_optional">
 </appwidget-provider>
 
 <!--    android:configure="com.example.android.ExampleAppWidgetConfigurationActivity"-->
+

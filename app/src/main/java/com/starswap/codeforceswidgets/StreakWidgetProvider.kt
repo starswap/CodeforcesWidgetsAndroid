@@ -8,7 +8,7 @@ import android.content.Intent
 import android.util.Log
 import android.widget.RemoteViews
 
-class ExampleAppWidgetProvider : AppWidgetProvider() {
+class StreakWidgetProvider : AppWidgetProvider() {
 
     override fun onUpdate(
         context: Context,
@@ -18,7 +18,7 @@ class ExampleAppWidgetProvider : AppWidgetProvider() {
         // Perform this loop procedure for each widget that belongs to this
         // provider.
         appWidgetIds.forEach { appWidgetId ->
-            Log.d("CF", "HIIII")
+//            if (appWidgetManager.)
         //            // Create an Intent to launch ExampleActivity.
 //            val pendingIntent: PendingIntent = PendingIntent.getActivity(
 //                /* context = */ context,
