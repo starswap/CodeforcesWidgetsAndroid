@@ -5,7 +5,6 @@ import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.os.SystemClock
 import android.util.Log
-import android.widget.Chronometer
 import android.widget.RemoteViews
 
 class TimerWidgetProvider : AppWidgetProvider() {
@@ -15,12 +14,13 @@ class TimerWidgetProvider : AppWidgetProvider() {
         appWidgetManager: AppWidgetManager,
         appWidgetIds: IntArray
     ) {
-        Log.d("oadipgoopsigpasdg", "guisgopasdgasdg")
-        // Perform this loop procedure for each widget that belongs to this
-        // provider.
-        appWidgetIds.forEach { appWidgetId ->
+        appWidgetIds.forEach { updateWidget(context, appWidgetManager, it) }
+    }
+}
 
-        //            // Create an Intent to launch ExampleActivity.
+fun updateWidget(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {
+    Log.d("TimerWidgetProvider", "Updating Widget $appWidgetId")
+    //            // Create an Intent to launch ExampleActivity.
 //            val pendingIntent: PendingIntent = PendingIntent.getActivity(
 //                /* context = */ context,
 //                /* requestCode = */  0,
@@ -28,11 +28,13 @@ class TimerWidgetProvider : AppWidgetProvider() {
 //                /* flags = */ PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
 //            )
 //
-            Log.d("gheeeee", "ahjklfjklasf")
-            val remoteViews = RemoteViews(context.packageName, R.layout.timer_widget_start_layout)
-            remoteViews.setChronometerCountDown(R.id.chronometer, false);
-            remoteViews.setChronometer(R.id.chronometer, SystemClock.elapsedRealtime() - 50000, null, true)
-            appWidgetManager.updateAppWidget(appWidgetId, remoteViews)
-        }
+    val handle = loadHandle(context, appWidgetId)
+    if (handle != null) {
+        Log.d("TimerWidgetProvider", "Got handle $handle")
+        val remoteViews = RemoteViews(context.packageName, R.layout.timer_widget_start_layout)
+
+        remoteViews.setChronometerCountDown(R.id.chronometer, false);
+        remoteViews.setChronometer(R.id.chronometer, SystemClock.elapsedRealtime() - 50000, null, true)
+        appWidgetManager.updateAppWidget(appWidgetId, remoteViews)
     }
 }

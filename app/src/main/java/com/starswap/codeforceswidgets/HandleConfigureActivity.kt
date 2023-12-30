@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.RemoteViews
 
 class HandleConfigureActivity : Activity() {
@@ -42,10 +43,14 @@ class HandleConfigureActivity : Activity() {
             Log.d("AppWidgetID", appWidgetId.toString())
             Log.d("InvalidAppWidget", AppWidgetManager.INVALID_APPWIDGET_ID.toString())
             //TO DO, Perform the configuration and get an instance of the AppWidgetManager//
-//            val appWidgetManager = AppWidgetManager.getInstance(context)
+            val appWidgetManager = AppWidgetManager.getInstance(context)
 //            val views = RemoteViews(context.packageName, R.layout.timer_widget_start_layout)
 //            appWidgetManager.updateAppWidget(appWidgetId, views)
             // we need to call through to the widget provider somehow
+            val handle = (findViewById<View>(R.id.handleTextbox) as EditText).text.toString()
+            Log.d("CFHANDLE", handle)
+            saveHandle(context, appWidgetId, handle)
+            updateWidget(context, appWidgetManager, appWidgetId)
 
 
             //Create the return intent//
