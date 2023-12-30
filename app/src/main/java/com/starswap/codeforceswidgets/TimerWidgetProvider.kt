@@ -15,6 +15,7 @@ class TimerWidgetProvider : AppWidgetProvider() {
         appWidgetManager: AppWidgetManager,
         appWidgetIds: IntArray
     ) {
+        Log.d("oadipgoopsigpasdg", "guisgopasdgasdg")
         // Perform this loop procedure for each widget that belongs to this
         // provider.
         appWidgetIds.forEach { appWidgetId ->
@@ -27,6 +28,7 @@ class TimerWidgetProvider : AppWidgetProvider() {
 //                /* flags = */ PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
 //            )
 //
+            Log.d("gheeeee", "ahjklfjklasf")
             val remoteViews = RemoteViews(context.packageName, R.layout.timer_widget_start_layout)
             remoteViews.setChronometerCountDown(R.id.chronometer, false);
             remoteViews.setChronometer(R.id.chronometer, SystemClock.elapsedRealtime() - 50000, null, true)

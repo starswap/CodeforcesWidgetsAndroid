@@ -25,6 +25,14 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".HandleConfigureActivity"
+            android:exported="true"
+            >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+            </intent-filter>
+        </activity>
+
         <receiver
             android:name=".StreakWidgetProvider"
             android:exported="false">
