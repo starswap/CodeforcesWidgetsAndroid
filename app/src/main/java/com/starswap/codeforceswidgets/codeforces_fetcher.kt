@@ -18,7 +18,6 @@ data class Member(val handle: String)
 data class UsersResponse(val status: String, val result: List<User>? = null, val comment: String? = null)
 data class User(val rating: Int? = null, val handle: String)
 
-
 fun latest_submissions(handle: String): List<Submission>? {
     val responseText = URL("https://codeforces.com/api/user.status?handle=$handle&from=1&count=100").readText()
     Log.d("CodeforcesAPI", responseText)
@@ -26,7 +25,6 @@ fun latest_submissions(handle: String): List<Submission>? {
     Log.d("CodeforcesAPI", "parsed response")
     return result
 }
-// Add configuration option for background colour
 
 fun get_user(handle: String): User? {
     val responseText = URL("https://codeforces.com/api/user.info?handles=$handle").readText()
