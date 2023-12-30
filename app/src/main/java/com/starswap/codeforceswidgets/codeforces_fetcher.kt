@@ -10,6 +10,9 @@ data class Problem(val contestId: Int, val index: String, val name: String, val 
 data class Author(val contestId: Int, val members: List<Member>, val participantType: String, val ghost: Boolean, val startTimeSeconds: Long? = null)
 data class Member(val handle: String)
 
+
+
+
 fun latest_submissions(handle: String): List<Submission>? {
     val responseText = URL("https://codeforces.com/api/user.status?handle=$handle&from=1&count=100").readText()
     Log.d("CodeforcesAPI", responseText)
@@ -17,3 +20,13 @@ fun latest_submissions(handle: String): List<Submission>? {
     Log.d("CodeforcesAPI", "parsed response")
     return result
 }
+
+fun get_user(handle: String): List<Submission>? {
+    val responseText = URL("htt$handle&from=1&count=100").readText()
+    Log.d("CodeforcesAPI", responseText)
+    val result = Klaxon().parse<SubmissionsResponse>(responseText)?.result
+    Log.d("CodeforcesAPI", "parsed response")
+    return result
+}
+
+https://codeforces.com/api/user.info?handles=sreesh_56
