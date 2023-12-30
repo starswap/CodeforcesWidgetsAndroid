@@ -28,13 +28,24 @@ fun updateWidget(context: Context, appWidgetManager: AppWidgetManager, appWidget
 //                /* flags = */ PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
 //            )
 //
+
     val handle = loadHandle(context, appWidgetId)
     if (handle != null) {
         Log.d("TimerWidgetProvider", "Got handle $handle")
         val remoteViews = RemoteViews(context.packageName, R.layout.timer_widget_start_layout)
+        val submissions =  latest_submissions(handle);
+        val lastAC = submissions?.firstOrNull { it.verdict == "OK" }
 
-        remoteViews.setChronometerCountDown(R.id.chronometer, false);
-        remoteViews.setChronometer(R.id.chronometer, SystemClock.elapsedRealtime() - 50000, null, true)
+        if (lastAC == null) {
+
+        } else {
+            remoteViews.setChronometerCountDown(R.id.chronometer, false);
+            Log.d("TimerWidgetProvider", "Creation time ${lastAC.creationTimeSeconds * 1000}")
+            Log.d("TimerWidgetProvider", "Old time ${SystemClock.elapsedRealtime() - 50000}")
+            val elapsedRealtimeOffset = System.currentTimeMillis() - SystemClock.elapsedRealtime()
+            val acTime = (lastAC.creationTimeSeconds * 1000) - elapsedRealtimeOffset
+            remoteViews.setChronometer(R.id.chronometer, acTime, null, true)
+        }
         appWidgetManager.updateAppWidget(appWidgetId, remoteViews)
     }
 }

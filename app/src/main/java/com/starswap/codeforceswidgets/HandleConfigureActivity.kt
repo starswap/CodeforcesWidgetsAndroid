@@ -10,6 +10,8 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RemoteViews
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class HandleConfigureActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,10 +50,10 @@ class HandleConfigureActivity : Activity() {
 //            appWidgetManager.updateAppWidget(appWidgetId, views)
             // we need to call through to the widget provider somehow
             val handle = (findViewById<View>(R.id.handleTextbox) as EditText).text.toString()
-            Log.d("CFHANDLE", handle)
             saveHandle(context, appWidgetId, handle)
-            updateWidget(context, appWidgetManager, appWidgetId)
 
+            val thread = Thread { updateWidget(context, appWidgetManager, appWidgetId) }
+            thread.start()
 
             //Create the return intent//
             val resultValue = Intent()
