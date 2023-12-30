@@ -3,13 +3,14 @@
     android:minHeight="80dp"
     android:targetCellWidth="2"
     android:targetCellHeight="2"
-    android:updatePeriodMillis="86400000"
+    android:updatePeriodMillis="1800000"
     android:description="@string/streak_widget_description"
     android:previewLayout="@layout/streak_widget_preview"
     android:initialLayout="@layout/streak_widget_start_layout"
     android:resizeMode="none"
     android:widgetCategory="home_screen"
-    android:widgetFeatures="reconfigurable|configuration_optional">
+    android:configure="com.starswap.codeforceswidgets.HandleConfigureActivity"
+    android:widgetFeatures="reconfigurable">
 </appwidget-provider>
 
 <!--    android:configure="com.example.android.ExampleAppWidgetConfigurationActivity"-->
