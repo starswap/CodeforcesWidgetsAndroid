@@ -45,6 +45,7 @@ fun updateWidget(context: Context, appWidgetManager: AppWidgetManager, appWidget
             val elapsedRealtimeOffset = System.currentTimeMillis() - SystemClock.elapsedRealtime()
             val acTime = (lastAC.creationTimeSeconds * 1000) - elapsedRealtimeOffset
             remoteViews.setChronometer(R.id.chronometer, acTime, null, true)
+            remoteViews.setTextViewText(R.id.handleLabel, handle)
         }
         appWidgetManager.updateAppWidget(appWidgetId, remoteViews)
     }
