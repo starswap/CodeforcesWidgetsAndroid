@@ -47,9 +47,9 @@ fun updateWidget(context: Context, appWidgetManager: AppWidgetManager, appWidget
             remoteViews.setChronometer(R.id.chronometer, acTime, null, true)
             val user = get_user(handle)
             Log.d("TimerWidgetProvider", "Rating ${(user?.rating ?: 0)}")
-            Log.d("TimerWidgetProvider", "Colour ${rating_to_colour(user?.rating ?: 0)}")
-            remoteViews.setTextColor(R.id.handleLabel, rating_to_colour(user?.rating ?: 0))
-            remoteViews.setTextViewText(R.id.handleLabel, handle)
+            if (user != null) {
+                remoteViews.setTextViewText(R.id.handleLabel, render_user(user))
+            }
         }
         appWidgetManager.updateAppWidget(appWidgetId, remoteViews)
     }
