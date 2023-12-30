@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CodeforcesWidgets"
         tools:targetApi="31">
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -24,21 +25,26 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name="StreakWidgetProvider"
+        <receiver
+            android:name=".StreakWidgetProvider"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
-            <meta-data android:name="android.appwidget.provider"
+
+            <meta-data
+                android:name="android.appwidget.provider"
                 android:resource="@xml/streak_widget" />
         </receiver>
-
-        <receiver android:name="TimerWidgetProvider"
+        <receiver
+            android:name=".TimerWidgetProvider"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
-            <meta-data android:name="android.appwidget.provider"
+
+            <meta-data
+                android:name="android.appwidget.provider"
                 android:resource="@xml/timer_widget" />
         </receiver>
     </application>
