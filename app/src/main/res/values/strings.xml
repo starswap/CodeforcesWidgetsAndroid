@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Codeforces Widgets</string>
+    <string name="app_name">CF Widgets</string>
     <string name="timer_widget_description">Time since last AC</string>
     <string name="streak_widget_description">Streak of a given user</string>
 </resources>
