@@ -6,6 +6,7 @@
     android:updatePeriodMillis="1800000"
     android:description="@string/timer_widget_description"
     android:previewLayout="@layout/timer_widget_preview"
+    android:previewImage="@drawable/timer_widget_preview"
     android:initialLayout="@layout/timer_widget_start_layout"
     android:resizeMode="none"
     android:widgetCategory="home_screen"
