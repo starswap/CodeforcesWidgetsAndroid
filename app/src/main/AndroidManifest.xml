@@ -36,7 +36,8 @@
 
         <receiver
             android:name=".StreakWidgetProvider"
-            android:exported="false">
+            android:exported="false"
+            android:label="@string/streak_widget_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -48,7 +49,8 @@
         <receiver
             android:name=".TimerWidgetProvider"
             android:exported="false"
-            android:previewImage="@drawable/timer_widget_preview">
+            android:previewImage="@drawable/timer_widget_preview"
+            android:label="@string/timer_widget_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
