@@ -1,0 +1,3 @@
+- Use background of device / allow user to configure widget background
+- Allow any submission not just AC submissions
+- Decide whether it's worth allowing the timer widget to update more frequently
