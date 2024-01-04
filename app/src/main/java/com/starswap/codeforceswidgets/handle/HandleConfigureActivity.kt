@@ -9,7 +9,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import com.starswap.codeforceswidgets.R
-import com.starswap.codeforceswidgets.timerwidget.updateWidget
+import com.starswap.codeforceswidgets.timerwidget.TimerWidgetProvider
 
 class HandleConfigureActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,7 +49,7 @@ class HandleConfigureActivity : Activity() {
             saveHandle(context, appWidgetId, handle)
 
             /* Start a thread to render the widget */
-            val thread = Thread { updateWidget(context, appWidgetManager, appWidgetId) }
+            val thread = Thread { TimerWidgetProvider.updateWidget(context, appWidgetManager, appWidgetId) }
             thread.start()
 
             /* We are done here so create the return intent */
