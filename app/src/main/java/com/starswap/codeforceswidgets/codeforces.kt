@@ -1,9 +1,7 @@
 package com.starswap.codeforceswidgets
 
 import android.graphics.Color
-import android.text.Html
 import android.text.SpannableString
-import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.util.Log
 import com.beust.klaxon.Klaxon
