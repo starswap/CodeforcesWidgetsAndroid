@@ -30,5 +30,5 @@
         android:layout_width="match_parent"
         android:layout_height="17dp"
         android:contentDescription="@string/streak_widget_tally_chart_description"
-        android:src="@drawable/tally_marks__4_" />
+        android:src="@drawable/tally_five" />
 </LinearLayout>
