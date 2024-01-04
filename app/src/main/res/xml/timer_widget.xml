@@ -10,7 +10,7 @@
     android:initialLayout="@layout/timer_widget_start_layout"
     android:resizeMode="none"
     android:widgetCategory="home_screen"
-    android:configure="com.starswap.codeforceswidgets.HandleConfigureActivity"
+    android:configure="com.starswap.codeforceswidgets.handle.HandleConfigureActivity"
     android:widgetFeatures="reconfigurable">
 </appwidget-provider>
 

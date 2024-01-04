@@ -1,4 +1,4 @@
-package com.starswap.codeforceswidgets
+package com.starswap.codeforceswidgets.handle
 
 import android.content.Context
 

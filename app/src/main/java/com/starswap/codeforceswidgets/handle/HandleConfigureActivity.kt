@@ -1,4 +1,4 @@
-package com.starswap.codeforceswidgets
+package com.starswap.codeforceswidgets.handle
 
 import android.app.Activity
 import android.appwidget.AppWidgetManager
@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import com.starswap.codeforceswidgets.R
+import com.starswap.codeforceswidgets.timerwidget.updateWidget
 
 class HandleConfigureActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,4 +1,4 @@
-package com.starswap.codeforceswidgets
+package com.starswap.codeforceswidgets.timerwidget
 
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
@@ -6,6 +6,11 @@ import android.content.Context
 import android.os.SystemClock
 import android.util.Log
 import android.widget.RemoteViews
+import com.starswap.codeforceswidgets.R
+import com.starswap.codeforceswidgets.codeforces.get_user
+import com.starswap.codeforceswidgets.codeforces.latest_submissions
+import com.starswap.codeforceswidgets.codeforces.render_user
+import com.starswap.codeforceswidgets.handle.loadHandle
 
 class TimerWidgetProvider : AppWidgetProvider() {
 

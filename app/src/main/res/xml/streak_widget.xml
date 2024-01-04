@@ -14,4 +14,4 @@
 </appwidget-provider>
 
 <!--    android:configure="com.example.android.ExampleAppWidgetConfigurationActivity"-->
-<!--    android:configure="com.starswap.codeforceswidgets.HandleConfigureActivity"-->
+<!--    android:configure="com.starswap.codeforceswidgets.handle.HandleConfigureActivity"-->

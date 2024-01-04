@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".HandleConfigureActivity"
+        <activity android:name=".handle.HandleConfigureActivity"
             android:exported="true"
             >
             <intent-filter>
@@ -33,7 +33,7 @@
         </activity>
 
         <receiver
-            android:name=".StreakWidgetProvider"
+            android:name=".streakwidget.StreakWidgetProvider"
             android:exported="false"
             android:label="@string/streak_widget_name">
             <intent-filter>
@@ -45,7 +45,7 @@
                 android:resource="@xml/streak_widget" />
         </receiver>
         <receiver
-            android:name=".TimerWidgetProvider"
+            android:name=".timerwidget.TimerWidgetProvider"
             android:exported="false"
             android:previewImage="@drawable/timer_widget_preview"
             android:label="@string/timer_widget_name">

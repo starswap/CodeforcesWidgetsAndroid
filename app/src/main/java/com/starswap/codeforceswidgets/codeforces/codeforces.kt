@@ -1,4 +1,4 @@
-package com.starswap.codeforceswidgets
+package com.starswap.codeforceswidgets.codeforces
 
 import android.graphics.Color
 import android.text.SpannableString
