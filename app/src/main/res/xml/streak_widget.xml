@@ -6,6 +6,7 @@
     android:updatePeriodMillis="1800000"
     android:description="@string/streak_widget_description"
     android:previewLayout="@layout/streak_widget_preview"
+    android:previewImage="@drawable/streak_widget_preview"
     android:initialLayout="@layout/streak_widget_start_layout"
     android:resizeMode="none"
     android:widgetCategory="home_screen"
