@@ -9,9 +9,8 @@
     android:initialLayout="@layout/streak_widget_start_layout"
     android:resizeMode="none"
     android:widgetCategory="home_screen"
-    android:configure="com.starswap.codeforceswidgets.HandleConfigureActivity"
     android:widgetFeatures="reconfigurable">
 </appwidget-provider>
 
 <!--    android:configure="com.example.android.ExampleAppWidgetConfigurationActivity"-->
-
+<!--    android:configure="com.starswap.codeforceswidgets.HandleConfigureActivity"-->

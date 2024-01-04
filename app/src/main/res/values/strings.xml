@@ -4,4 +4,6 @@
     <string name="streak_widget_description">Streak of a given user</string>
     <string name="timer_widget_name">AC Timer</string>
     <string name="streak_widget_name">Streak</string>
+    <string name="streak_widget_tally_chart_description">Tally Marks for problems solved today</string>
+    <string name="streak_widget_logo_text">Codeforces Logo for Streak Widget</string>
 </resources>
