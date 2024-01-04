@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import com.starswap.codeforceswidgets.R
+import com.starswap.codeforceswidgets.streakwidget.StreakWidgetProvider
 import com.starswap.codeforceswidgets.timerwidget.TimerWidgetProvider
 
 class HandleConfigureActivity : Activity() {
@@ -43,13 +44,20 @@ class HandleConfigureActivity : Activity() {
 
             /* Get an instance of the AppWidgetManager */
             val appWidgetManager = AppWidgetManager.getInstance(context)
+            val appWidgetProviderInfo = appWidgetManager.getAppWidgetInfo(appWidgetId)
 
             /* Save the handle that the user asked for into local storage for the widget */
             val handle = (findViewById<View>(R.id.handleTextbox) as EditText).text.toString()
             saveHandle(context, appWidgetId, handle)
 
             /* Start a thread to render the widget */
-            val thread = Thread { TimerWidgetProvider.updateWidget(context, appWidgetManager, appWidgetId) }
+            val thread = Thread {
+                if (appWidgetProviderInfo.provider.className == "TimerWidgetProvider") {
+                    TimerWidgetProvider.updateOneWidget(context, appWidgetManager, appWidgetId)
+                } else {
+                    StreakWidgetProvider.updateOneWidget(context, appWidgetManager, appWidgetId)
+                }
+            }
             thread.start()
 
             /* We are done here so create the return intent */

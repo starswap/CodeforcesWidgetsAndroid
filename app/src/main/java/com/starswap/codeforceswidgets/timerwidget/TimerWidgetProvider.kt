@@ -4,7 +4,6 @@ import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.os.SystemClock
-import android.util.Log
 import android.widget.RemoteViews
 import com.starswap.codeforceswidgets.R
 import com.starswap.codeforceswidgets.codeforces.get_user
@@ -18,11 +17,11 @@ class TimerWidgetProvider : AppWidgetProvider() {
         appWidgetManager: AppWidgetManager,
         appWidgetIds: IntArray
     ) {
-        appWidgetIds.forEach { updateWidget(context, appWidgetManager, it) }
+        appWidgetIds.forEach { updateOneWidget(context, appWidgetManager, it) }
     }
 
     companion object {
-        fun updateWidget(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {
+        fun updateOneWidget(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {
             val handle = loadHandle(context, appWidgetId)
             if (handle != null) {
                 val remoteViews = RemoteViews(context.packageName, R.layout.timer_widget_start_layout)

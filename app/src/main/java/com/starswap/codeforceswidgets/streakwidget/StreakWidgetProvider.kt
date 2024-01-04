@@ -3,38 +3,47 @@ package com.starswap.codeforceswidgets.streakwidget
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
+import android.os.SystemClock
+import android.widget.RemoteViews
+import com.starswap.codeforceswidgets.R
+import com.starswap.codeforceswidgets.codeforces.get_user
+import com.starswap.codeforceswidgets.codeforces.latest_submissions
+import com.starswap.codeforceswidgets.codeforces.render_user
+import com.starswap.codeforceswidgets.handle.loadHandle
 
 class StreakWidgetProvider : AppWidgetProvider() {
-
     override fun onUpdate(
         context: Context,
         appWidgetManager: AppWidgetManager,
         appWidgetIds: IntArray
     ) {
-        // Perform this loop procedure for each widget that belongs to this
-        // provider.
-        appWidgetIds.forEach { appWidgetId ->
-//            if (appWidgetManager.)
-        //            // Create an Intent to launch ExampleActivity.
-//            val pendingIntent: PendingIntent = PendingIntent.getActivity(
-//                /* context = */ context,
-//                /* requestCode = */  0,
-//                /* intent = */ Intent(context, ExampleActivity::class.java),
-//                /* flags = */ PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-//            )
-//
-//            // Get the layout for the widget and attach an onClick listener to
-//            // the button.
-//            val views: RemoteViews = RemoteViews(
-//                context.packageName,
-//                R.layout.appwidget_provider_layout
-//            ).apply {
-//                setOnClickPendingIntent(R.id.button, pendingIntent)
-//            }
-//
-//            // Tell the AppWidgetManager to perform an update on the current
-//            // widget.
-//            appWidgetManager.updateAppWidget(appWidgetId, views)
+        appWidgetIds.forEach { updateOneWidget(context, appWidgetManager, it) }
+    }
+
+    companion object {
+        fun updateOneWidget(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {
+            val handle = loadHandle(context, appWidgetId)
+            if (handle != null) {
+                val remoteViews = RemoteViews(context.packageName, R.layout.timer_widget_start_layout)
+                val submissions =  latest_submissions(handle);
+                val lastAC = submissions?.firstOrNull { it.verdict == "OK" }
+
+                if (lastAC == null) {
+
+                } else {
+                    remoteViews.setChronometerCountDown(R.id.chronometer, false);
+                    val elapsedRealtimeOffset = System.currentTimeMillis() - SystemClock.elapsedRealtime()
+                    val acTime = (lastAC.creationTimeSeconds * 1000) - elapsedRealtimeOffset
+                    remoteViews.setChronometer(R.id.chronometer, acTime, null, true)
+                    val user = get_user(handle)
+                    if (user != null) {
+                        remoteViews.setTextViewText(R.id.handleLabel, render_user(user))
+                    }
+                }
+                appWidgetManager.updateAppWidget(appWidgetId, remoteViews)
+            }
         }
     }
 }
+
+
