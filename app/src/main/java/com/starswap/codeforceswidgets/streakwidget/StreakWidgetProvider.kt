@@ -3,6 +3,7 @@ package com.starswap.codeforceswidgets.streakwidget
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
+import android.net.Uri
 import android.os.SystemClock
 import android.widget.RemoteViews
 import com.starswap.codeforceswidgets.R
@@ -24,22 +25,11 @@ class StreakWidgetProvider : AppWidgetProvider() {
         fun updateOneWidget(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {
             val handle = loadHandle(context, appWidgetId)
             if (handle != null) {
-                val remoteViews = RemoteViews(context.packageName, R.layout.timer_widget_start_layout)
-                val submissions =  latest_submissions(handle);
-                val lastAC = submissions?.firstOrNull { it.verdict == "OK" }
+                val remoteViews = RemoteViews(context.packageName, R.layout.streak_widget_start_layout)
+                val (streak, doneToday) = Pair(10, false)// streak(handle);
 
-                if (lastAC == null) {
-
-                } else {
-                    remoteViews.setChronometerCountDown(R.id.chronometer, false);
-                    val elapsedRealtimeOffset = System.currentTimeMillis() - SystemClock.elapsedRealtime()
-                    val acTime = (lastAC.creationTimeSeconds * 1000) - elapsedRealtimeOffset
-                    remoteViews.setChronometer(R.id.chronometer, acTime, null, true)
-                    val user = get_user(handle)
-                    if (user != null) {
-                        remoteViews.setTextViewText(R.id.handleLabel, render_user(user))
-                    }
-                }
+                remoteViews.setTextViewText(R.id.streak, streak.toString())
+                remoteViews.setImageViewResource(R.id.cf_logo, if (doneToday) R.drawable.codeforces_logo_colour else R.drawable.codeforces_logo_bw)
                 appWidgetManager.updateAppWidget(appWidgetId, remoteViews)
             }
         }

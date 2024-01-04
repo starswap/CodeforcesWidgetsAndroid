@@ -8,7 +8,7 @@
     android:visibility="visible">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/streak"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="-6dp"
@@ -19,14 +19,14 @@
         android:textSize="24sp" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/cf_logo"
         android:layout_width="match_parent"
-        android:layout_height="57dp"
+        android:layout_height="61dp"
         android:contentDescription="@string/streak_widget_logo_text"
         android:src="@drawable/codeforces_logo_colour" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/tally_chart"
         android:layout_width="match_parent"
         android:layout_height="17dp"
         android:contentDescription="@string/streak_widget_tally_chart_description"
