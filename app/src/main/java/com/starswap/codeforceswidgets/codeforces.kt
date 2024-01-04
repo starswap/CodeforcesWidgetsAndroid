@@ -3,7 +3,6 @@ package com.starswap.codeforceswidgets
 import android.graphics.Color
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
-import android.util.Log
 import com.beust.klaxon.Klaxon
 import java.net.URL
 
@@ -17,18 +16,14 @@ data class UsersResponse(val status: String, val result: List<User>? = null, val
 data class User(val rating: Int? = null, val handle: String)
 
 fun latest_submissions(handle: String): List<Submission>? {
-    val responseText = URL("https://codeforces.com/api/user.status?handle=$handle&from=1&count=100").readText()
-    Log.d("CodeforcesAPI", responseText)
-    val result = Klaxon().parse<SubmissionsResponse>(responseText)?.result
-    Log.d("CodeforcesAPI", "parsed response")
-    return result
+    val responseText =
+        URL("https://codeforces.com/api/user.status?handle=$handle&from=1&count=100").readText()
+    return Klaxon().parse<SubmissionsResponse>(responseText)?.result
 }
 
 fun get_user(handle: String): User? {
     val responseText = URL("https://codeforces.com/api/user.info?handles=$handle").readText()
-    Log.d("CodeforcesAPI", responseText)
     val result = Klaxon().parse<UsersResponse>(responseText)?.result
-    Log.d("CodeforcesAPI", "parsed response")
     return result?.first()
 }
 
@@ -42,7 +37,8 @@ fun render_user(user: User): SpannableString  {
     return string
 }
 
-private fun rating_to_colour(rating: Int) = when {
+private fun rating_to_colour(rating: Int)
+  = when {
         rating < 1200 -> 0xFF808080.toInt()
         rating < 1400 -> 0xFF008000.toInt()
         rating < 1600 -> 0xFF03a89e.toInt()
@@ -54,5 +50,3 @@ private fun rating_to_colour(rating: Int) = when {
         rating < 3000 -> 0xFFff0000.toInt() // IGM
         else          -> 0xFFff0000.toInt() // LGM
     }
-
-
