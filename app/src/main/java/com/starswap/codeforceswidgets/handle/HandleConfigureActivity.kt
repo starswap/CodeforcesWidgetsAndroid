@@ -52,7 +52,7 @@ class HandleConfigureActivity : Activity() {
 
             /* Start a thread to render the widget */
             val thread = Thread {
-                if (appWidgetProviderInfo.provider.className == "TimerWidgetProvider") {
+                if (appWidgetProviderInfo.provider.className == "com.starswap.codeforceswidgets.timerwidget.TimerWidgetProvider") {
                     TimerWidgetProvider.updateOneWidget(context, appWidgetManager, appWidgetId)
                 } else {
                     StreakWidgetProvider.updateOneWidget(context, appWidgetManager, appWidgetId)
