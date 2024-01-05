@@ -3,11 +3,11 @@ package com.starswap.codeforceswidgets.streakwidget
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
-import android.util.Log
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.RemoteViews
 import com.starswap.codeforceswidgets.R
+import com.starswap.codeforceswidgets.codeforces.streak
 import com.starswap.codeforceswidgets.handle.loadHandle
 
 class StreakWidgetProvider : AppWidgetProvider() {
@@ -41,7 +41,7 @@ class StreakWidgetProvider : AppWidgetProvider() {
             val handle = loadHandle(context, appWidgetId)
             if (handle != null) {
                 val remoteViews = RemoteViews(context.packageName, R.layout.streak_widget_start_layout)
-                val (streak, doneToday) = Pair(10, 100)// streak(handle);
+                val (streak, doneToday) = streak(handle);
 
                 remoteViews.setTextViewText(R.id.streak, streak.toString())
                 remoteViews.setImageViewResource(R.id.cf_logo, if (doneToday > 0) R.drawable.codeforces_logo_colour else R.drawable.codeforces_logo_bw)

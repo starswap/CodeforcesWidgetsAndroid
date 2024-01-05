@@ -3,8 +3,12 @@ package com.starswap.codeforceswidgets.codeforces
 import android.graphics.Color
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
+import android.util.Log
 import com.beust.klaxon.Klaxon
 import java.net.URL
+import java.time.LocalDate
+import java.util.Calendar
+import java.util.TimeZone
 
 data class SubmissionsResponse(val status: String, val result: List<Submission>? = null, val comment: String? = null)
 data class Submission(val id: Int, val contestId: Int, val creationTimeSeconds: Long, val relativeTimeSeconds: Long, val problem: Problem, val author: Author, val programmingLanguage: String, val verdict: String? = null, val testset: String, val passedTestCount: Int, val timeConsumedMillis: Int, val memoryConsumedBytes: Int)
@@ -15,9 +19,12 @@ data class Member(val handle: String)
 data class UsersResponse(val status: String, val result: List<User>? = null, val comment: String? = null)
 data class User(val rating: Int? = null, val handle: String)
 
-fun latest_submissions(handle: String): List<Submission>? {
-    val responseText =
-        URL("https://codeforces.com/api/user.status?handle=$handle&from=1&count=100").readText()
+fun latest_submissions(handle: String, min: Int = 1, limit: Int? = 100): List<Submission>? {
+    var query = "https://codeforces.com/api/user.status?handle=$handle&from=$min"
+    if (limit != null) {
+        query += "&count=$limit"
+    }
+    val responseText = URL(query).readText()
     return Klaxon().parse<SubmissionsResponse>(responseText)?.result
 }
 
@@ -50,3 +57,45 @@ private fun rating_to_colour(rating: Int)
         rating < 3000 -> 0xFFff0000.toInt() // IGM
         else          -> 0xFFff0000.toInt() // LGM
     }
+
+fun streak(handle: String): Pair<Int, Int> {
+    fun toLocalDate(epochSeconds: Long): LocalDate {
+        val tz = TimeZone.getDefault()
+        val cal = Calendar.Builder().setInstant(epochSeconds * 1000).setTimeZone(tz).build()
+        return LocalDate.of(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH))
+    }
+    val today = LocalDate.now() /* Cache this because the function might be executed at 11:59:59 pm :( */
+    val BATCH_SIZE = 100
+
+    var streakStart = today
+    var submissionsToday = 0
+    var streak = 0
+    var submissionsBatch: List<Submission>?
+
+    var min = 1
+    var streakDone = false;
+    do {
+        submissionsBatch = latest_submissions(handle, min, min + BATCH_SIZE - 1)
+
+        submissionsBatch?.let { submissionsBatch ->
+            val submissionDates = submissionsBatch.map { toLocalDate(it.creationTimeSeconds) }
+            Log.d("Streak", submissionDates.toString())
+            submissionsToday += submissionDates.count { it == today }
+            for (submissionDate in submissionDates) {
+                if (streakStart.minusDays(1) == submissionDate) {
+                    streakStart = submissionDate
+                    streak++
+                } else if (streakStart.minusDays(1) > submissionDate) {
+                    streakDone = true;
+                    break;
+                }
+            }
+        }
+        min += BATCH_SIZE
+    } while (!streakDone && !submissionsBatch.isNullOrEmpty())
+
+    if (submissionsToday > 0) {
+        streak++
+    }
+    return Pair(streak, submissionsToday)
+}
