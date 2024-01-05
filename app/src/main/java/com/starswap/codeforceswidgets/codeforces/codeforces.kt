@@ -68,7 +68,8 @@ fun streak(handle: String): Pair<Int, Int> {
     val BATCH_SIZE = 100
 
     var streakStart = today
-    var submissionsToday = 0
+    var acProblemsToday = 0
+    var hasSubmittedToday = false
     var streak = 0
     var submissionsBatch: List<Submission>?
 
@@ -80,7 +81,8 @@ fun streak(handle: String): Pair<Int, Int> {
         submissionsBatch?.let { submissionsBatch ->
             val submissionDates = submissionsBatch.map { toLocalDate(it.creationTimeSeconds) }
             Log.d("Streak", submissionDates.toString())
-            submissionsToday += submissionDates.count { it == today }
+            acProblemsToday += submissionsBatch.filter { toLocalDate(it.creationTimeSeconds) == today }.map { it.problem }.toSet().size
+            hasSubmittedToday = hasSubmittedToday || submissionDates.count { it == today } > 0
             for (submissionDate in submissionDates) {
                 if (streakStart.minusDays(1) == submissionDate) {
                     streakStart = submissionDate
@@ -94,8 +96,8 @@ fun streak(handle: String): Pair<Int, Int> {
         min += BATCH_SIZE
     } while (!streakDone && !submissionsBatch.isNullOrEmpty())
 
-    if (submissionsToday > 0) {
+    if (hasSubmittedToday) {
         streak++
     }
-    return Pair(streak, submissionsToday)
+    return Pair(streak, acProblemsToday)
 }
