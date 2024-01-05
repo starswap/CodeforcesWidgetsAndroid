@@ -19,7 +19,7 @@ data class Member(val handle: String)
 data class UsersResponse(val status: String, val result: List<User>? = null, val comment: String? = null)
 data class User(val rating: Int? = null, val handle: String)
 
-fun latest_submissions(handle: String, min: Int = 1, limit: Int? = 100): List<Submission>? {
+fun latest_submissions(handle: String, min: Int = 1, limit: Int? = 20): List<Submission>? {
     var query = "https://codeforces.com/api/user.status?handle=$handle&from=$min"
     if (limit != null) {
         query += "&count=$limit"
